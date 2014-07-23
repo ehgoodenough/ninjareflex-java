@@ -4,6 +4,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class PapercutNinja extends BasicGame
@@ -22,7 +23,9 @@ public class PapercutNinja extends BasicGame
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
+		Input input = container.getInput();
 		
+		papercut.update(input, delta);
 	}
 	
 	public void render(GameContainer container, Graphics graphics) throws SlickException
