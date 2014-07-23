@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 
 public class PapercutNinja extends BasicGame
 {
+	public Ninja papercut;
 	
 	public PapercutNinja()
 	{
@@ -16,7 +17,7 @@ public class PapercutNinja extends BasicGame
 	
 	public void init(GameContainer container) throws SlickException
 	{
-		
+		papercut = new Ninja(5, 5);
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException
@@ -26,7 +27,7 @@ public class PapercutNinja extends BasicGame
 	
 	public void render(GameContainer container, Graphics graphics) throws SlickException
 	{
-		
+		papercut.render();
 	}
 
 	public static void main(String[] args)
