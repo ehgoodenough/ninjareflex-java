@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 
 public class Ninja
 {
-	private float x, y;
+	public float x, y;
 	private Image image;
 	
 	public Ninja(float x, float y) throws SlickException
@@ -49,9 +49,19 @@ public class Ninja
 	
 	public void render()
 	{
-		int x = (int)this.x - (this.image.getWidth() / 2);
-		int y = (int)this.y - (this.image.getHeight() / 2);
+		int y = this.getY();
+		int x = Math.min(getX(), (11 / 2) * this.image.getWidth());
 		
 		image.draw(x, y);
+	}
+	
+	public int getX()
+	{
+		return (int)x - (this.image.getWidth() / 2);
+	}
+	
+	public int getY()
+	{
+		return (int)y - (this.image.getHeight() / 2);
 	}
 }
