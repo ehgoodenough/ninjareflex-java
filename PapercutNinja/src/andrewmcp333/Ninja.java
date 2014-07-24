@@ -8,47 +8,57 @@ public class Ninja extends Entity
 {
 	private Image image;
 	
-	public int tx, ty;
-	
 	private float speed = 1f;
+	private Action action;
 	
 	public Ninja(int x, int y) throws SlickException
 	{
-		this.tx = x;
-		this.ty = y;
 		this.x = x * 64;
 		this.y = y * 64;
 		
 		this.image = new Image("./res/ninja.png");
 	}
 	
-	public void update(int delta)
+	public void update(Input input, int delta)
 	{
-		if(x < (tx - 0.1) * 64)
+		if(action == null)
 		{
-			x += speed * delta;
-		}
-		else if(x > (tx + 0.1) * 64)
-		{
-			x -= speed * delta;
-		}
-		else
-		{
-			x = tx * 64;
+			action = getAction(input);
 		}
 		
-		if(y < (ty - 0.1) * 64)
+		if(action != null)
 		{
-			y += speed * 2 * delta;
+			if(x < action.x - 0.25)
+			{
+				x += speed * delta;
+			}
+			else if(x > action.x + 0.25)
+			{
+				x -= speed * delta;
+			}
+			else
+			{
+				x = action.x;
+				action = null;
+			}
 		}
-		else if(y > (ty + 0.1) * 64)
+
+		/*if(action != null)
 		{
-			y -= speed * 2 * delta;
-		}
-		else
-		{
-			y = ty * 64;
-		}
+			if(y < action.y - 0.25)
+			{
+				y += speed * 2 * delta;
+			}
+			else if(y > action.y + 0.25)
+			{
+				y -= speed * 2 * delta;
+			}
+			else
+			{
+				y = action.y;
+				action = null;
+			}ddd
+		}*/
 	}
 	
 	public void render(Camera camera)
@@ -58,12 +68,12 @@ public class Ninja extends Entity
 	
 	public Action getAction(Input input)
 	{
-		if(input.isKeyPressed(Input.KEY_D)) {return new Action(this, Direction.EAST);}
-		if(input.isKeyPressed(Input.KEY_A)) {return new Action(this, Direction.WEST);}
-		if(input.isKeyPressed(Input.KEY_S)) {return new Action(this, Direction.SOUTH);}
-		if(input.isKeyPressed(Input.KEY_W)) {return new Action(this, Direction.NORTH);}
-		if(input.isKeyPressed(Input.KEY_E)) {return new Action(this, Direction.NORTHEAST);}
-		if(input.isKeyPressed(Input.KEY_Q)) {return new Action(this, Direction.NORTHWEST);}
+		if(input.isKeyPressed(Input.KEY_D)) {return new Action(x, y, Direction.EAST);}
+		if(input.isKeyPressed(Input.KEY_A)) {return new Action(x, y, Direction.WEST);}
+		if(input.isKeyPressed(Input.KEY_S)) {return new Action(x, y, Direction.SOUTH);}
+		if(input.isKeyPressed(Input.KEY_W)) {return new Action(x, y, Direction.NORTH);}
+		if(input.isKeyPressed(Input.KEY_E)) {return new Action(x, y, Direction.NORTHEAST);}
+		if(input.isKeyPressed(Input.KEY_Q)) {return new Action(x, y, Direction.NORTHWEST);}
 		
 		return null;
 	}

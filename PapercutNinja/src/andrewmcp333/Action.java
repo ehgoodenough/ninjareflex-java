@@ -2,44 +2,38 @@ package andrewmcp333;
 
 public class Action
 {
-	private Ninja ninja;
-	private Direction direction;
+	public float x, y;
 	
-	public Action(Ninja ninja, Direction direction)
-	{
-		this.ninja = ninja;
-		this.direction = direction;
-	}
-	
-	public void doit()
+	public Action(float x, float y, Direction direction)
 	{
 		if(direction == Direction.NORTH)
 		{
-			ninja.ty--;
+			y -= 64;
 		}
 		else if(direction == Direction.SOUTH)
 		{
-			ninja.ty++;
+			y += 64;
 		}
 		else if(direction == Direction.EAST)
 		{
-			ninja.tx++;
-			ninja.ty++;
+			x += 64;
 		}
 		else if(direction == Direction.WEST)
 		{
-			ninja.tx--;
-			ninja.ty++;
+			x -= 64;
 		}
 		else if(direction == Direction.NORTHEAST)
 		{
-			ninja.tx++;
-			ninja.ty--;
+			x += 64;
+			y -= 64;
 		}
 		else if(direction == Direction.NORTHWEST)
 		{
-			ninja.tx--;
-			ninja.ty--;
+			x -= 64;
+			y -= 64;
 		}
+		
+		this.x = x;
+		this.y = y;
 	}
 }

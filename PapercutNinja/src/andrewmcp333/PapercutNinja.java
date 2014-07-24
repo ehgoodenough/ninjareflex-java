@@ -31,14 +31,7 @@ public class PapercutNinja extends BasicGame
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
-		Action action = papercut.getAction(container.getInput());
-		
-		if(action != null)
-		{
-			action.doit();
-		}
-		
-		papercut.update(delta);
+		papercut.update(container.getInput(), delta);
 	}
 	
 	public void render(GameContainer container, Graphics graphics) throws SlickException
