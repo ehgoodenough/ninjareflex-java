@@ -10,11 +10,11 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class PapercutNinja extends BasicGame
 {
-	public TiledLevel level;
 	public Ninja papercut;
-	
+	public TiledLevel level;
 	public Screen screen;
 	public Camera camera;
+	public Action action;
 	
 	public PapercutNinja()
 	{
@@ -23,16 +23,16 @@ public class PapercutNinja extends BasicGame
 	
 	public void init(GameContainer container) throws SlickException
 	{
-		level = new TiledLevel("./res/level.tmx");
 		papercut = new Ninja(2, 5);
-		
-		screen = new Screen(11, 7);
+		level = new TiledLevel("./res/level.tmx");
+		screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
 		camera = new Camera(screen, papercut, level);
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
-		papercut.update(container.getInput(), delta);
+		papercut.getAction(container.getInput());
+		papercut.update(delta);
 	}
 	
 	public void render(GameContainer container, Graphics graphics) throws SlickException
@@ -46,7 +46,7 @@ public class PapercutNinja extends BasicGame
 		try
 		{
 			container = new AppGameContainer(new PapercutNinja());
-			container.setDisplayMode(11*64, 7*64, false);
+			container.setDisplayMode(SCREEN_WIDTH * 64, SCREEN_HEIGHT * 64, false);
 			container.start();
 		}
 		catch(Exception error)
@@ -56,4 +56,7 @@ public class PapercutNinja extends BasicGame
 	}
 	
 	public static AppGameContainer container;
+	
+	public static final int SCREEN_WIDTH = 11;
+	public static final int SCREEN_HEIGHT = 7;
 }

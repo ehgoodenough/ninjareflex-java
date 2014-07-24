@@ -8,7 +8,7 @@ public class Ninja extends Entity
 {
 	private Image image;
 	
-	private int tx, ty;
+	public int tx, ty;
 	
 	private float speed = 1f;
 	
@@ -22,37 +22,8 @@ public class Ninja extends Entity
 		this.image = new Image("./res/ninja.png");
 	}
 	
-	public void update(Input input, int delta)
+	public void update(int delta)
 	{
-		if(input.isKeyPressed(Input.KEY_D))
-		{
-			tx++;
-		}
-		else if(input.isKeyPressed(Input.KEY_A))
-		{
-			tx--;
-		}
-		else if(input.isKeyPressed(Input.KEY_S))
-		{
-			ty++;
-		}
-		else if(input.isKeyPressed(Input.KEY_W))
-		{
-			ty--;
-		}
-		else if(input.isKeyPressed(Input.KEY_E))
-		{
-			tx++;
-			ty--;
-		}
-		else if(input.isKeyPressed(Input.KEY_Q))
-		{
-			tx--;
-			ty--;
-		}
-		
-		
-		
 		if(x < (tx - 0.1) * 64)
 		{
 			x += speed * delta;
@@ -83,5 +54,17 @@ public class Ninja extends Entity
 	public void render(Camera camera)
 	{
 		image.draw(x - camera.getOffset(), y);
+	}
+	
+	public Action getAction(Input input)
+	{
+		if(input.isKeyPressed(Input.KEY_D)) {return new Action(this, Direction.EAST);}
+		if(input.isKeyPressed(Input.KEY_A)) {return new Action(this, Direction.WEST);}
+		if(input.isKeyPressed(Input.KEY_S)) {return new Action(this, Direction.SOUTH);}
+		if(input.isKeyPressed(Input.KEY_W)) {return new Action(this, Direction.NORTH);}
+		if(input.isKeyPressed(Input.KEY_E)) {return new Action(this, Direction.NORTHEAST);}
+		if(input.isKeyPressed(Input.KEY_Q)) {return new Action(this, Direction.NORTHWEST);}
+		
+		return null;
 	}
 }

@@ -13,4 +13,9 @@ public abstract class Entity
 	{
 		return y;
 	}
+	
+	public void update(int delta, int tx, int ty)
+	{
+		//update the entity here!
+	}
 }
