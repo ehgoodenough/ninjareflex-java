@@ -8,10 +8,16 @@ public class Ninja extends Entity
 {
 	private Image image;
 	
+	private int tx, ty;
+	
+	private float speed = 1f;
+	
 	public Ninja(int x, int y) throws SlickException
 	{
-		this.x = x;
-		this.y = y;
+		this.tx = x;
+		this.ty = y;
+		this.x = x * 64;
+		this.y = y * 64;
 		
 		this.image = new Image("./res/ninja.png");
 	}
@@ -20,50 +26,62 @@ public class Ninja extends Entity
 	{
 		if(input.isKeyPressed(Input.KEY_D))
 		{
-			this.x++;
+			tx++;
 		}
 		else if(input.isKeyPressed(Input.KEY_A))
 		{
-			this.x--;
+			tx--;
 		}
 		else if(input.isKeyPressed(Input.KEY_S))
 		{
-			this.y++;
+			ty++;
 		}
 		else if(input.isKeyPressed(Input.KEY_W))
 		{
-			this.y--;
+			ty--;
 		}
 		else if(input.isKeyPressed(Input.KEY_E))
 		{
-			this.x++;
-			this.y--;
+			tx++;
+			ty--;
 		}
 		else if(input.isKeyPressed(Input.KEY_Q))
 		{
-			this.x--;
-			this.y--;
+			tx--;
+			ty--;
+		}
+		
+		
+		
+		if(x < (tx - 0.1) * 64)
+		{
+			x += speed * delta;
+		}
+		else if(x > (tx + 0.1) * 64)
+		{
+			x -= speed * delta;
+		}
+		else
+		{
+			x = tx * 64;
+		}
+		
+		if(y < (ty - 0.1) * 64)
+		{
+			y += speed * 2 * delta;
+		}
+		else if(y > (ty + 0.1) * 64)
+		{
+			y -= speed * 2 * delta;
+		}
+		else
+		{
+			y = ty * 64;
 		}
 	}
 	
 	public void render(Camera camera)
 	{
-		//int x = Math.min(getPixelyX(), (11/2)*64));
-		//int y = getPixelyY();
-
-		int x = getX() - camera.getOffset();
-		int y = getY();
-		
-		image.draw(x, y);
-	}
-	
-	public int getX()
-	{
-		return x * 64;
-	}
-	
-	public int getY()
-	{
-		return y * 64;
+		image.draw(x - camera.getOffset(), y);
 	}
 }

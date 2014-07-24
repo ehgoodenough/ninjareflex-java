@@ -19,7 +19,7 @@ public class Camera
 	
 	public int getOffset()
 	{
-		int offset = focus.getX() - screen.getHalfWidth();
+		float offset = focus.getX() - screen.getHalfWidth();
 		
 		if(offset < minimumOffset)
 		{
@@ -30,6 +30,6 @@ public class Camera
 			offset = maximumOffset;
 		}
 		
-		return offset;
+		return (int)offset;
 	}
 }

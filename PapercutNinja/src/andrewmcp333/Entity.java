@@ -2,14 +2,14 @@ package andrewmcp333;
 
 public abstract class Entity
 {
-	public int x, y;
+	public float x, y;
 	
-	public int getX()
+	public float getX()
 	{
 		return x;
 	}
 	
-	public int getY()
+	public float getY()
 	{
 		return y;
 	}
