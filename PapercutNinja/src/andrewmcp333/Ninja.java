@@ -9,7 +9,7 @@ public class Ninja extends Entity
 	private Image image;
 	
 	private float speed = 1f;
-	private Action action;
+	public Action action;
 	
 	public Ninja(int x, int y) throws SlickException
 	{
@@ -19,13 +19,8 @@ public class Ninja extends Entity
 		this.image = new Image("./res/ninja.png");
 	}
 	
-	public void update(Input input, int delta)
+	public void update(int delta)
 	{
-		if(action == null)
-		{
-			action = getAction(input);
-		}
-		
 		if(action != null)
 		{
 			if(x < action.x - 0.25)
@@ -58,7 +53,7 @@ public class Ninja extends Entity
 		image.draw(x - camera.getOffset(), y);
 	}
 	
-	public Action getAction(Input input)
+	public Action requestCurrentAction(Input input)
 	{
 		if(input.isKeyPressed(Input.KEY_D)) {return new Action(x, y, Direction.EAST);}
 		if(input.isKeyPressed(Input.KEY_A)) {return new Action(x, y, Direction.WEST);}
