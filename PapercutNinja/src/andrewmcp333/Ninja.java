@@ -36,29 +36,21 @@ public class Ninja extends Entity
 			{
 				x -= speed * delta;
 			}
-			else
-			{
-				x = action.x;
-				action = null;
-			}
-		}
-
-		/*if(action != null)
-		{
+			
 			if(y < action.y - 0.25)
 			{
-				y += speed * 2 * delta;
+				y += speed * delta;
 			}
 			else if(y > action.y + 0.25)
 			{
-				y -= speed * 2 * delta;
+				y -= speed * delta;
 			}
-			else
+			
+			if(x == action.x && y == action.y)
 			{
-				y = action.y;
 				action = null;
-			}ddd
-		}*/
+			}
+		}
 	}
 	
 	public void render(Camera camera)
