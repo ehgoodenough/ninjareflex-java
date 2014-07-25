@@ -26,15 +26,20 @@ public class PapercutNinja extends BasicGame
 		level = new TiledLevel("./res/level.tmx");
 		screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
 		camera = new Camera(screen, papercut, level);
+		
+		Action.level = level; //this is so bad.
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
-		Action action = papercut.requestCurrentAction(container.getInput());
-		
-		if(action != null && papercut.action == null)
+		if(papercut.action == null)
 		{
-			papercut.action = action;
+			Action action = papercut.requestCurrentAction(container.getInput());
+			
+			if(action != null)
+			{
+				papercut.action = action;
+			}
 		}
 		
 		papercut.update(delta);
