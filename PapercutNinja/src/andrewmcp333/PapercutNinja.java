@@ -35,9 +35,13 @@ public class PapercutNinja extends BasicGame
 		if(action == null)
 		{
 			action = papercut.requestAction(container.getInput());
+			
+			if(action != null)
+			{
+				level.collide(action);
+			}
 		}
-		
-		if(action != null)
+		else
 		{
 			action.update(delta);
 			

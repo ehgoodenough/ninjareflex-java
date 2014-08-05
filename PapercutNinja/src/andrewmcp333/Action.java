@@ -13,8 +13,8 @@ public class Action
 		this.entity = entity;
 		this.direction = direction;
 		
-		this.tx = (int)(entity.x / 64);
-		this.ty = (int)(entity.y / 64);
+		tx = getOriginalTileX();
+		ty = getOriginalTileY();
 		
 		if(direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST)
 		{
@@ -65,5 +65,25 @@ public class Action
 	public boolean isDone()
 	{
 		return done;
+	}
+	
+	public int getOriginalTileX()
+	{
+		return (int)(entity.x / 64);
+	}
+	
+	public int getOriginalTileY()
+	{
+		return (int)(entity.y / 64);
+	}
+	
+	public void revertX()
+	{
+		tx = getOriginalTileX();
+	}
+	
+	public void revertY()
+	{
+		ty = getOriginalTileY();
 	}
 }

@@ -24,4 +24,24 @@ public class TiledLevel extends TiledMap
 	{
 		return getHeight() * getTileHeight();
 	}
+	
+	public void collide(Action action)
+	{
+		int tx = action.getTileX();
+		int ty = action.getTileY();
+		
+		if(tx >= 0 && tx < getWidth() && ty >= 0 && ty < getHeight())
+		{
+			if(getTileProperty(getTileId(tx, ty, 0), "collider", "false").equals("true"))
+			{
+				action.revertX();
+				action.revertY();
+			}
+		}
+		else
+		{
+			action.revertX();
+			action.revertY();
+		}
+	}
 }
