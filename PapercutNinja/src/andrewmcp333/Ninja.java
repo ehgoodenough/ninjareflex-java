@@ -39,14 +39,7 @@ public class Ninja extends Entity
 			y -= speed * delta;
 		}
 		
-		if(x == action.getX() && y == action.getY())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return x == action.getX() && y == action.getY();
 	}
 	
 	public void render(Camera camera)

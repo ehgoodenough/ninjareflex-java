@@ -42,16 +42,6 @@ public class Action
 		done = entity.update(this, delta);
 	}
 	
-	public int getTX()
-	{
-		return tx;
-	}
-	
-	public int getTY()
-	{
-		return ty;
-	}
-	
 	public int getX()
 	{
 		return tx * 64;
@@ -60,6 +50,16 @@ public class Action
 	public int getY()
 	{
 		return ty * 64;
+	}
+	
+	public int getTileX()
+	{
+		return tx;
+	}
+	
+	public int getTileY()
+	{
+		return ty;
 	}
 	
 	public boolean isDone()
