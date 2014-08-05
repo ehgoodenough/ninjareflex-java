@@ -15,6 +15,8 @@ public class PapercutNinja extends BasicGame
 	public Screen screen;
 	public Camera camera;
 	
+	public Action action;
+	
 	public PapercutNinja()
 	{
 		super("Papercut the Ninja");
@@ -26,23 +28,19 @@ public class PapercutNinja extends BasicGame
 		level = new TiledLevel("./res/level.tmx");
 		screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
 		camera = new Camera(screen, papercut, level);
-		
-		Action.level = level; //this is so bad.
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
-		if(papercut.action == null)
+		if(action == null)
 		{
-			Action action = papercut.requestCurrentAction(container.getInput());
-			
-			if(action != null)
-			{
-				papercut.action = action;
-			}
+			action = papercut.requestAction(container.getInput());
 		}
 		
-		papercut.update(delta);
+		if(action != null)
+		{
+			action.update(delta);
+		}
 	}
 	
 	public void render(GameContainer container, Graphics graphics) throws SlickException
@@ -50,12 +48,12 @@ public class PapercutNinja extends BasicGame
 		level.render(camera);
 		papercut.render(camera);
 	}
-
+	
 	public static void main(String[] args)
 	{
 		try
 		{
-			container = new AppGameContainer(new PapercutNinja());
+			AppGameContainer container = new AppGameContainer(new PapercutNinja());
 			container.setDisplayMode(SCREEN_WIDTH * 64, SCREEN_HEIGHT * 64, false);
 			container.start();
 		}
@@ -64,8 +62,6 @@ public class PapercutNinja extends BasicGame
 			System.out.println(error.getMessage());
 		}
 	}
-	
-	public static AppGameContainer container;
 	
 	public static final int SCREEN_WIDTH = 11;
 	public static final int SCREEN_HEIGHT = 7;

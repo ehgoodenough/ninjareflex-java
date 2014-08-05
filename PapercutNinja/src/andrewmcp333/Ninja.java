@@ -19,32 +19,24 @@ public class Ninja extends Entity
 		this.image = new Image("./res/ninja.png");
 	}
 	
-	public void update(int delta)
+	public void update(int tx, int ty, int delta)
 	{
-		if(action != null)
+		if(x < tx * 64 - 0.25)
 		{
-			if(x < action.x - 0.25)
-			{
-				x += speed * delta;
-			}
-			else if(x > action.x + 0.25)
-			{
-				x -= speed * delta;
-			}
-			
-			if(y < action.y - 0.25)
-			{
-				y += speed * delta;
-			}
-			else if(y > action.y + 0.25)
-			{
-				y -= speed * delta;
-			}
-			
-			if(x == action.x && y == action.y)
-			{
-				action = null;
-			}
+			x += speed * delta;
+		}
+		else if(x > tx * 64 + 0.25)
+		{
+			x -= speed * delta;
+		}
+		
+		if(y < ty * 64 - 0.25)
+		{
+			y += speed * delta;
+		}
+		else if(y > ty * 64 + 0.25)
+		{
+			y -= speed * delta;
 		}
 	}
 	
@@ -53,14 +45,14 @@ public class Ninja extends Entity
 		image.draw(x - camera.getOffset(), y);
 	}
 	
-	public Action requestCurrentAction(Input input)
+	public Action requestAction(Input input)
 	{
-		if(input.isKeyPressed(Input.KEY_D)) {return new Action(x, y, Direction.EAST);}
-		if(input.isKeyPressed(Input.KEY_A)) {return new Action(x, y, Direction.WEST);}
-		if(input.isKeyPressed(Input.KEY_S)) {return new Action(x, y, Direction.SOUTH);}
-		if(input.isKeyPressed(Input.KEY_W)) {return new Action(x, y, Direction.NORTH);}
-		if(input.isKeyPressed(Input.KEY_E)) {return new Action(x, y, Direction.NORTHEAST);}
-		if(input.isKeyPressed(Input.KEY_Q)) {return new Action(x, y, Direction.NORTHWEST);}
+		if(input.isKeyPressed(Input.KEY_D)) {return new Action(this, Direction.EAST);}
+		if(input.isKeyPressed(Input.KEY_A)) {return new Action(this, Direction.WEST);}
+		if(input.isKeyPressed(Input.KEY_S)) {return new Action(this, Direction.SOUTH);}
+		if(input.isKeyPressed(Input.KEY_W)) {return new Action(this, Direction.NORTH);}
+		if(input.isKeyPressed(Input.KEY_E)) {return new Action(this, Direction.NORTHEAST);}
+		if(input.isKeyPressed(Input.KEY_Q)) {return new Action(this, Direction.NORTHWEST);}
 		
 		return null;
 	}

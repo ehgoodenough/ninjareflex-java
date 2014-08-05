@@ -2,64 +2,42 @@ package andrewmcp333;
 
 public class Action
 {
-	public float x, y;
+	private Entity entity;
+	private Direction direction;
 	
-	public static TiledLevel level;
+	private int tx = 0, ty = 0;
 	
-	public Action(float x, float y, Direction direction)
+	public Action(Entity entity, Direction direction)
 	{
-		int tx = (int)(x / 64);
-		int ty = (int)(y / 64);
+		this.entity = entity;
+		this.direction = direction;
+		
+		tx = (int)(entity.x / 64);
+		ty = (int)(entity.y / 64);
 		
 		if(direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST)
 		{
-			if(ty - 1 >= 0)
-			{
-		        int tid = level.getTileId(tx, ty - 1, 0);
-		        if(level.getTileProperty(tid, "collider", "false").equals("false"))
-		        {
-		        	y -= 64;
-		        }
-			}
+			ty -= 1;
 		}
 		
 		if(direction == Direction.SOUTH)
 		{
-			if(ty + 1 < level.getHeight())
-			{
-		        int tid = level.getTileId(tx, ty + 1, 0);
-		        if(level.getTileProperty(tid, "collider", "false").equals("false"))
-		        {
-					y += 64;
-		        }
-			}
+			ty += 1;
 		}
 		
 		if(direction == Direction.EAST || direction == Direction.NORTHEAST)
 		{
-			if(tx + 1 < level.getWidth())
-			{
-		        int tid = level.getTileId(tx + 1, ty, 0);
-		        if(level.getTileProperty(tid, "collider", "false").equals("false"))
-		        {
-					x += 64;
-		        }
-			}
+			tx += 1;
 		}
 		
 		if(direction == Direction.WEST || direction == Direction.NORTHWEST)
 		{
-			if(tx - 1 >= 0)
-			{
-		        int tid = level.getTileId(tx - 1, ty, 0);
-		        if(level.getTileProperty(tid, "collider", "false").equals("false"))
-		        {
-					x -= 64;
-		        }
-			}
+			tx -= 1;
 		}
-		
-		this.x = x;
-		this.y = y;
+	}
+	
+	public void update(int delta)
+	{
+		entity.update(tx, ty, delta);
 	}
 }
