@@ -6,14 +6,15 @@ public class Action
 	private Direction direction;
 	
 	private int tx = 0, ty = 0;
+	private boolean done = false;
 	
 	public Action(Entity entity, Direction direction)
 	{
 		this.entity = entity;
 		this.direction = direction;
 		
-		tx = (int)(entity.x / 64);
-		ty = (int)(entity.y / 64);
+		this.tx = (int)(entity.x / 64);
+		this.ty = (int)(entity.y / 64);
 		
 		if(direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST)
 		{
@@ -38,6 +39,31 @@ public class Action
 	
 	public void update(int delta)
 	{
-		entity.update(tx, ty, delta);
+		done = entity.update(this, delta);
+	}
+	
+	public int getTX()
+	{
+		return tx;
+	}
+	
+	public int getTY()
+	{
+		return ty;
+	}
+	
+	public int getX()
+	{
+		return tx * 64;
+	}
+	
+	public int getY()
+	{
+		return ty * 64;
+	}
+	
+	public boolean isDone()
+	{
+		return done;
 	}
 }

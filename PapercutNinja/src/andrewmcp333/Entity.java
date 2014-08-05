@@ -14,8 +14,8 @@ public abstract class Entity
 		return y;
 	}
 	
-	public void update(int delta, int tx, int ty)
+	public boolean update(Action action, int delta)
 	{
-		//update the entity here!
+		return false;
 	}
 }

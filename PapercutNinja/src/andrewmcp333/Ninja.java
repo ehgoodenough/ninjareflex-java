@@ -19,24 +19,33 @@ public class Ninja extends Entity
 		this.image = new Image("./res/ninja.png");
 	}
 	
-	public void update(int tx, int ty, int delta)
+	public boolean update(Action action, int delta)
 	{
-		if(x < tx * 64 - 0.25)
+		if(x < action.getX() - 0.25)
 		{
 			x += speed * delta;
 		}
-		else if(x > tx * 64 + 0.25)
+		else if(x > action.getX() + 0.25)
 		{
 			x -= speed * delta;
 		}
 		
-		if(y < ty * 64 - 0.25)
+		if(y < action.getY() - 0.25)
 		{
 			y += speed * delta;
 		}
-		else if(y > ty * 64 + 0.25)
+		else if(y > action.getY() + 0.25)
 		{
 			y -= speed * delta;
+		}
+		
+		if(x == action.getX() && y == action.getY())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	

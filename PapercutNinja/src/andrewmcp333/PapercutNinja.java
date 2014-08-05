@@ -40,6 +40,11 @@ public class PapercutNinja extends BasicGame
 		if(action != null)
 		{
 			action.update(delta);
+			
+			if(action.isDone())
+			{
+				action = null;
+			}
 		}
 	}
 	
