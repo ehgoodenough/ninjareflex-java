@@ -27,7 +27,7 @@ public class PapercutNinja extends BasicGame
 	public void init(GameContainer container) throws SlickException
 	{
 		entities = new Objedex();
-		entities.papercut = new Ninja(2, 5);
+		entities.papercut = new Ninja(2, 2);
 		entities.missiles.add(new Missile(7, 3));
 		
 		level = new TiledLevel("./res/level.tmx");

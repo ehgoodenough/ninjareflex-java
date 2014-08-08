@@ -21,17 +21,17 @@ public class Action
 			ty -= 1;
 		}
 		
-		if(direction == Direction.SOUTH)
+		if(direction == Direction.SOUTH || direction == Direction.SOUTHEAST || direction == Direction.SOUTHWEST)
 		{
 			ty += 1;
 		}
 		
-		if(direction == Direction.EAST || direction == Direction.NORTHEAST)
+		if(direction == Direction.EAST || direction == Direction.NORTHEAST || direction == Direction.SOUTHEAST)
 		{
 			tx += 1;
 		}
 		
-		if(direction == Direction.WEST || direction == Direction.NORTHWEST)
+		if(direction == Direction.WEST || direction == Direction.NORTHWEST || direction == Direction.SOUTHWEST)
 		{
 			tx -= 1;
 		}

@@ -13,8 +13,8 @@ public class Ninja extends Entity
 	
 	public Action requestAction(Input input)
 	{
-		if(input.isKeyPressed(Input.KEY_D)) {return new Action(this, Direction.EAST);}
-		if(input.isKeyPressed(Input.KEY_A)) {return new Action(this, Direction.WEST);}
+		if(input.isKeyPressed(Input.KEY_D)) {return new Action(this, Direction.SOUTHEAST);}
+		if(input.isKeyPressed(Input.KEY_A)) {return new Action(this, Direction.SOUTHWEST);}
 		if(input.isKeyPressed(Input.KEY_S)) {return new Action(this, Direction.SOUTH);}
 		if(input.isKeyPressed(Input.KEY_W)) {return new Action(this, Direction.NORTH);}
 		if(input.isKeyPressed(Input.KEY_E)) {return new Action(this, Direction.NORTHEAST);}
