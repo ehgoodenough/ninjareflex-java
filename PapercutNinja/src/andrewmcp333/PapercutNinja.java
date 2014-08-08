@@ -10,8 +10,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class PapercutNinja extends BasicGame
 {
-	public Ninja papercut;
-	public Missile bulletbill;
+	public EntityManager entities;
 	public TiledLevel level;
 	public Screen screen;
 	public Camera camera;
@@ -26,25 +25,28 @@ public class PapercutNinja extends BasicGame
 	
 	public void init(GameContainer container) throws SlickException
 	{
-		papercut = new Ninja(2, 5);
-		bulletbill = new Missile(7, 3);
+		entities = new EntityManager();
+		entities.papercut = new Ninja(2, 5);
+		entities.bulletbill = new Missile(7, 3);
+		
 		level = new TiledLevel("./res/level.tmx");
+		
 		screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
-		camera = new Camera(screen, papercut, level);
+		camera = new Camera(screen, entities.papercut, level);
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
 		if(papercut_action == null)
 		{
-			papercut_action = papercut.requestAction(container.getInput());
+			papercut_action = entities.papercut.requestAction(container.getInput());
 			
 			if(papercut_action != null)
 			{
 				level.collide(papercut_action);
 			}
 			
-			bulletbill_action = bulletbill.requestAction();
+			bulletbill_action = entities.bulletbill.requestAction();
 		}
 		else
 		{
@@ -61,8 +63,8 @@ public class PapercutNinja extends BasicGame
 	public void render(GameContainer container, Graphics graphics) throws SlickException
 	{
 		level.render(camera);
-		papercut.render(camera);
-		bulletbill.render(camera);
+		entities.papercut.render(camera);
+		entities.bulletbill.render(camera);
 	}
 	
 	public static void main(String[] args)
