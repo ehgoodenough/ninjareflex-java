@@ -22,12 +22,10 @@ public class TiledLevel extends TiledMap
 				if(getTileProperty(tid, "collider", "false").equals("false"))
 				{
 					colliders[tx][ty] = false;
-					System.out.print(0);
 				}
 				else
 				{
 					colliders[tx][ty] = true;
-					System.out.print(1);
 				}
 			}
 		}
@@ -50,30 +48,25 @@ public class TiledLevel extends TiledMap
 	
 	public void collide(Action action)
 	{
-		int tx = action.getTileX();
-		int ty = action.getTileY();
-		
 		if(action.hasNorthernMovement())
 		{
-			if(ty - 1 < 0)
-			{
-				action.removeNorthernMovement();
-			}
-			
-			if(hasCollider(tx, ty - 1))
+			if(action.getNewTileY() < 0)
 			{
 				action.removeNorthernMovement();
 			}
 		}
 		
+		if(action.hasSouthernMovement())
+		{
+			if(action.getNewTileY() >= getHeight())
+			{
+				action.removeSouthernMovement();
+			}
+		}
+		
 		if(action.hasWesternMovement())
 		{
-			if(tx - 1 < 0)
-			{
-				action.removeWesternMovement();
-			}
-			
-			if(hasCollider(tx - 1, ty))
+			if(action.getNewTileX() < 0)
 			{
 				action.removeWesternMovement();
 			}
@@ -81,28 +74,20 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasEasternMovement())
 		{
-			if(tx + 1 >= getWidth())
-			{
-				action.removeEasternMovement();
-			}
-			
-			if(hasCollider(tx + 1, ty))
+			if(action.getNewTileX() >= getWidth())
 			{
 				action.removeEasternMovement();
 			}
 		}
 		
-		if(action.hasSouthernMovement())
+		int ntx = action.getNewTileX();
+		int nty = action.getNewTileY();
+		
+		if(hasCollider(ntx, nty))
 		{
-			if(ty + 1 >= getHeight())
-			{
-				action.removeSouthernMovement();
-			}
+			//find alternative adjacent tiles, use isOrthogonal or isDiagonal?
 			
-			if(hasCollider(tx, ty + 1))
-			{
-				action.removeSouthernMovement();
-			}
+			action.removeSouthernMovement(); //for gravity.
 		}
 	}
 	
