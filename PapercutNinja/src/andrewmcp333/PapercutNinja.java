@@ -14,7 +14,9 @@ public class PapercutNinja extends BasicGame
 	public TiledLevel level;
 	public Screen screen;
 	public Camera camera;
-
+	
+	public Moment moment;
+	
 	public Action papercut_action;
 	public Action bulletbill_action;
 	
@@ -37,25 +39,28 @@ public class PapercutNinja extends BasicGame
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
-		if(papercut_action == null)
+		if(moment == null)
 		{
-			papercut_action = entities.papercut.requestAction(container.getInput());
+			moment = new Moment();
+			
+			Action papercut_action = entities.papercut.requestAction(container.getInput());
+			Action bulletbill_action = entities.bulletbill.requestAction();
 			
 			if(papercut_action != null)
 			{
 				level.collide(papercut_action);
+				
+				moment.add(papercut_action);
+				moment.add(bulletbill_action);
 			}
-			
-			bulletbill_action = entities.bulletbill.requestAction();
 		}
 		else
 		{
-			papercut_action.update(delta);
-			bulletbill_action.update(delta);
+			moment.update(delta);
 			
-			if(papercut_action.isDone())
+			if(moment.isDone())
 			{
-				papercut_action = null;
+				moment = null;
 			}
 		}
 	}
