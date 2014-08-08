@@ -34,14 +34,10 @@ public class TiledLevel extends TiledMap
 		{
 			if(getTileProperty(getTileId(tx, ty, 0), "collider", "false").equals("true"))
 			{
-				action.revertY();
-				action.revertX();
 			}
 		}
 		else
 		{
-			action.revertY();
-			action.revertX();
 		}
 	}
 }

@@ -4,8 +4,8 @@ public class Action
 {
 	private Entity entity;
 	private Direction direction;
-	
 	private int tx = 0, ty = 0;
+	
 	private boolean done = false;
 	
 	public Action(Entity entity, Direction direction)
@@ -13,9 +13,36 @@ public class Action
 		this.entity = entity;
 		this.direction = direction;
 		
-		tx = getOriginalTileX();
-		ty = getOriginalTileY();
+		this.tx = (int)(entity.x / 64);
+		this.ty = (int)(entity.y / 64);
+	}
+	
+	public void update(int delta)
+	{
+		done = entity.update(this, delta);
+	}
+	
+	public int getTileX()
+	{
+		int tx = this.tx;
+
+		if(direction == Direction.EAST || direction == Direction.NORTHEAST || direction == Direction.SOUTHEAST)
+		{
+			tx += 1;
+		}
 		
+		if(direction == Direction.WEST || direction == Direction.NORTHWEST || direction == Direction.SOUTHWEST)
+		{
+			tx -= 1;
+		}
+		
+		return tx;
+	}
+	
+	public int getTileY()
+	{
+		int ty = this.ty;
+
 		if(direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST)
 		{
 			ty -= 1;
@@ -26,64 +53,21 @@ public class Action
 			ty += 1;
 		}
 		
-		if(direction == Direction.EAST || direction == Direction.NORTHEAST || direction == Direction.SOUTHEAST)
-		{
-			tx += 1;
-		}
-		
-		if(direction == Direction.WEST || direction == Direction.NORTHWEST || direction == Direction.SOUTHWEST)
-		{
-			tx -= 1;
-		}
-	}
-	
-	public void update(int delta)
-	{
-		done = entity.update(this, delta);
+		return ty;
 	}
 	
 	public int getX()
 	{
-		return tx * 64;
+		return getTileX() * 64;
 	}
 	
 	public int getY()
 	{
-		return ty * 64;
-	}
-	
-	public int getTileX()
-	{
-		return tx;
-	}
-	
-	public int getTileY()
-	{
-		return ty;
+		return getTileY() * 64;
 	}
 	
 	public boolean isDone()
 	{
 		return done;
-	}
-	
-	public int getOriginalTileX()
-	{
-		return (int)(entity.x / 64);
-	}
-	
-	public int getOriginalTileY()
-	{
-		return (int)(entity.y / 64);
-	}
-	
-	public void revertX()
-	{
-		tx = getOriginalTileX();
-	}
-	
-	public void revertY()
-	{
-		ty = getOriginalTileY();
 	}
 }
