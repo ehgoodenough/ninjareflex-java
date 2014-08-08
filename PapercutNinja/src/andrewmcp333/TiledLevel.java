@@ -5,9 +5,32 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class TiledLevel extends TiledMap
 {
+	boolean[][] colliders;
+	
 	public TiledLevel(String path) throws SlickException
 	{
 		super(path);
+		
+		colliders = new boolean[getWidth()][getHeight()];
+		
+		for(int ty = 0; ty < getHeight(); ty++)
+		{
+			for(int tx = 0; tx < getWidth(); tx++)
+			{
+				int tid = getTileId(tx, ty, 0);
+				
+				if(getTileProperty(tid, "collider", "false").equals("false"))
+				{
+					colliders[tx][ty] = false;
+					System.out.print(0);
+				}
+				else
+				{
+					colliders[tx][ty] = true;
+					System.out.print(1);
+				}
+			}
+		}
 	}
 	
 	public void render(Camera camera)
@@ -51,10 +74,16 @@ public class TiledLevel extends TiledMap
 			{
 				action.removeSouthernMovement();
 			}
-			if(getTileProperty(getTileId(tx, ty + 1, 0), "collider", "false").equals("true"))
+			
+			if(hasCollider(tx, ty + 1))
 			{
 				action.removeSouthernMovement();
 			}
 		}
+	}
+	
+	public boolean hasCollider(int tx, int ty)
+	{
+		return colliders[tx][ty];
 	}
 }
