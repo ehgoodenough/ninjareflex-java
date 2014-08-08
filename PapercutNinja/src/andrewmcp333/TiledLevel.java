@@ -30,14 +30,18 @@ public class TiledLevel extends TiledMap
 		int tx = action.getTileX();
 		int ty = action.getTileY();
 		
+		/*if(action.hasNorthernMovement() && action.getTileY() == 0)
+		
 		if(tx >= 0 && tx < getWidth() && ty >= 0 && ty < getHeight())
 		{
 			if(getTileProperty(getTileId(tx, ty, 0), "collider", "false").equals("true"))
 			{
+				
 			}
 		}
 		else
 		{
-		}
+			
+		}*/
 	}
 }

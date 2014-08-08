@@ -29,25 +29,25 @@ public abstract class Entity
 	
 	public boolean update(Action action, int delta)
 	{
-		if(x < action.getX() - 0.25)
+		if(x < action.getNewX() - 0.25)
 		{
 			x += speed * delta;
 		}
-		else if(x > action.getX() + 0.25)
+		else if(x > action.getNewX() + 0.25)
 		{
 			x -= speed * delta;
 		}
 		
-		if(y < action.getY() - 0.25)
+		if(y < action.getNewY() - 0.25)
 		{
 			y += speed * delta;
 		}
-		else if(y > action.getY() + 0.25)
+		else if(y > action.getNewY() + 0.25)
 		{
 			y -= speed * delta;
 		}
 		
-		return x == action.getX() && y == action.getY();
+		return x == action.getNewX() && y == action.getNewY();
 	}
 	
 	public void render(Camera camera)
