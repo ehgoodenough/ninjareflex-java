@@ -16,10 +16,89 @@ public class Action
 		this.ty = (int)(entity.y / 64);
 	}
 
-	public boolean movingNorth() {return direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST;}
-	public boolean movingSouth() {return direction == Direction.SOUTH || direction == Direction.SOUTHEAST || direction == Direction.SOUTHWEST;}
-	public boolean movingEast() {return direction == Direction.EAST || direction == Direction.NORTHEAST || direction == Direction.SOUTHEAST;}
-	public boolean movingWest() {return direction == Direction.WEST || direction == Direction.NORTHWEST || direction == Direction.SOUTHWEST;}
+	public boolean hasNorthernMovement()
+	{
+		return direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST;
+	}
+	
+	public boolean hasSouthernMovement()
+	{
+		return direction == Direction.SOUTH || direction == Direction.SOUTHEAST || direction == Direction.SOUTHWEST;
+	}
+	
+	public boolean hasEasternMovement()
+	{
+		return direction == Direction.EAST || direction == Direction.NORTHEAST || direction == Direction.SOUTHEAST;
+	}
+	
+	public boolean hasWesternMovement()
+	{
+		return direction == Direction.WEST || direction == Direction.NORTHWEST || direction == Direction.SOUTHWEST;
+	}
+	
+	public void removeNorthernMovement()
+	{
+		if(direction == Direction.NORTH)
+		{
+			direction = Direction.NONE;
+		}
+		else if(direction == Direction.NORTHEAST)
+		{
+			direction = Direction.EAST;
+		}
+		else if(direction == Direction.NORTHWEST)
+		{
+			direction = Direction.WEST;
+		}
+	}
+	
+	public void removeSouthernMovement()
+	{
+		if(direction == Direction.SOUTH)
+		{
+			direction = Direction.NONE;
+		}
+		else if(direction == Direction.SOUTHEAST)
+		{
+			direction = Direction.EAST;
+		}
+		else if(direction == Direction.SOUTHWEST)
+		{
+			direction = Direction.WEST;
+		}
+	}
+	
+	public void removeEasternMovement()
+	{
+		if(direction == Direction.EAST)
+		{
+			direction = Direction.NONE;
+		}
+		else if(direction == Direction.NORTHEAST)
+		{
+			direction = Direction.NORTH;
+		}
+		else if(direction == Direction.SOUTHEAST)
+		{
+			direction = Direction.SOUTH;
+		}
+	}
+	
+	public void removeWesternMovement()
+	{
+		if(direction == Direction.WEST)
+		{
+			direction = Direction.NONE;
+		}
+		else if(direction == Direction.NORTHWEST)
+		{
+			direction = Direction.NORTH;
+		}
+		else if(direction == Direction.SOUTHWEST)
+		{
+			direction = Direction.SOUTH;
+		}
+	}
 	
 	public int getTileX()
 	{
@@ -45,11 +124,11 @@ public class Action
 	{
 		int tx = this.tx;
 
-		if(movingEast())
+		if(hasEasternMovement())
 		{
 			tx += 1;
 		}
-		else if(movingWest())
+		else if(hasWesternMovement())
 		{
 			tx -= 1;
 		}
@@ -61,11 +140,11 @@ public class Action
 	{
 		int ty = this.ty;
 
-		if(movingNorth())
+		if(hasNorthernMovement())
 		{
 			ty -= 1;
 		}
-		else if(movingSouth())
+		else if(hasSouthernMovement())
 		{
 			ty += 1;
 		}

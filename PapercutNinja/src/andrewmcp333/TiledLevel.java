@@ -30,18 +30,31 @@ public class TiledLevel extends TiledMap
 		int tx = action.getTileX();
 		int ty = action.getTileY();
 		
-		/*if(action.hasNorthernMovement() && action.getTileY() == 0)
-		
-		if(tx >= 0 && tx < getWidth() && ty >= 0 && ty < getHeight())
+		if(action.hasNorthernMovement() && ty - 1 < 0)
 		{
-			if(getTileProperty(getTileId(tx, ty, 0), "collider", "false").equals("true"))
+			action.removeNorthernMovement();
+		}
+		
+		if(action.hasWesternMovement() && tx - 1< 0)
+		{
+			action.removeWesternMovement();
+		}
+		
+		if(action.hasEasternMovement() && tx + 1 >= getWidth())
+		{
+			action.removeEasternMovement();
+		}
+		
+		if(action.hasSouthernMovement())
+		{
+			if(ty + 1 >= getHeight())
 			{
-				
+				action.removeSouthernMovement();
+			}
+			if(getTileProperty(getTileId(tx, ty + 1, 0), "collider", "false").equals("true"))
+			{
+				action.removeSouthernMovement();
 			}
 		}
-		else
-		{
-			
-		}*/
 	}
 }
