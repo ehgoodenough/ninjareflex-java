@@ -1,5 +1,7 @@
 package andrewmcp333;
 
+import java.util.LinkedList;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -41,14 +43,14 @@ public class PapercutNinja extends BasicGame
 			moment = new Moment();
 			
 			Action papercut_action = entities.papercut.requestAction(container.getInput());
-			Action bulletbill_action = entities.missiles.get(0).requestAction();
+			LinkedList<Action> missile_actions = entities.missiles.requestActions();
 			
 			if(papercut_action != null)
 			{
 				level.collide(papercut_action);
 				
 				moment.add(papercut_action);
-				moment.add(bulletbill_action);
+				moment.add(missile_actions);
 			}
 		}
 		else
@@ -66,7 +68,7 @@ public class PapercutNinja extends BasicGame
 	{
 		level.render(camera);
 		entities.papercut.render(camera);
-		entities.missiles.get(0).render(camera);
+		entities.missiles.render(camera);
 	}
 	
 	public static void main(String[] args)

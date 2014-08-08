@@ -10,20 +10,16 @@ public class Moment
 	{
 		actions.add(action);
 	}
-	public void add(LinkedList<Action> actions)
+	public void add(LinkedList<Action> action)
 	{
-		//actions.add(actions);
+		actions.addAll(action);
 	}
 	
 	public boolean isDone()
 	{
 		for(Action action : actions)
-		{
 			if(!action.isDone())
-			{
 				return false;
-			}
-		}
 		
 		return true;
 	}
@@ -31,8 +27,6 @@ public class Moment
 	public void update(int delta)
 	{
 		for(Action action : actions)
-		{
 			action.update(delta);
-		}
 	}
 }

@@ -54,4 +54,9 @@ public abstract class Entity
 	{
 		image.draw(x - camera.getOffset(), y);
 	}
+	
+	public Action requestAction()
+	{
+		return null;
+	}
 }
