@@ -5,10 +5,14 @@ import java.util.LinkedList;
 public class Moment
 {
 	private LinkedList<Action> actions = new LinkedList<Action>();
-	
+
 	public void add(Action action)
 	{
 		actions.add(action);
+	}
+	public void add(LinkedList<Action> actions)
+	{
+		//actions.add(actions);
 	}
 	
 	public boolean isDone()
