@@ -12,8 +12,8 @@ public class Action
 	{
 		this.entity = entity;
 		this.direction = direction;
-		this.tx = (int)(entity.x / 64);
-		this.ty = (int)(entity.y / 64);
+		this.tx = entity.getTileX();
+		this.ty = entity.getTileY();
 	}
 	
 	public Direction getDirection()

@@ -27,6 +27,16 @@ public abstract class Entity
 		return y;
 	}
 	
+	public int getTileX()
+	{
+		return (int)(x / 64);
+	}
+	
+	public int getTileY()
+	{
+		return (int)(y / 64);
+	}
+	
 	public boolean update(Action action, int delta)
 	{
 		if(x < action.getNewX() - 0.25)
