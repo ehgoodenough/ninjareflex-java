@@ -15,7 +15,12 @@ public class Action
 		this.tx = (int)(entity.x / 64);
 		this.ty = (int)(entity.y / 64);
 	}
-
+	
+	public Direction getDirection()
+	{
+		return direction;
+	}
+	
 	public boolean hasNorthernMovement()
 	{
 		return direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST;

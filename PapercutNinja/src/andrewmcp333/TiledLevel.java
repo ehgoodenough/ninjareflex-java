@@ -54,11 +54,21 @@ public class TiledLevel extends TiledMap
 			{
 				action.removeNorthernMovement();
 			}
+			
+			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
+			{
+				action.removeNorthernMovement();
+			}
 		}
 		
 		if(action.hasSouthernMovement())
 		{
 			if(action.getNewTileY() >= getHeight())
+			{
+				action.removeSouthernMovement();
+			}
+			
+			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
 			{
 				action.removeSouthernMovement();
 			}
@@ -70,6 +80,11 @@ public class TiledLevel extends TiledMap
 			{
 				action.removeWesternMovement();
 			}
+			
+			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
+			{
+				action.removeWesternMovement();
+			}
 		}
 		
 		if(action.hasEasternMovement())
@@ -78,16 +93,11 @@ public class TiledLevel extends TiledMap
 			{
 				action.removeEasternMovement();
 			}
-		}
-		
-		int ntx = action.getNewTileX();
-		int nty = action.getNewTileY();
-		
-		if(hasCollider(ntx, nty))
-		{
-			//find alternative adjacent tiles, use isOrthogonal or isDiagonal?
 			
-			action.removeSouthernMovement(); //for gravity.
+			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
+			{
+				action.removeEasternMovement();
+			}
 		}
 	}
 	
