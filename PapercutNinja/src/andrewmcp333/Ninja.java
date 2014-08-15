@@ -99,7 +99,7 @@ public class Ninja extends Entity
 		int tx = getTileX();
 		int ty = getTileY();
 		
-		if(ty + 1 <= level.getHeight() && level.hasCollider(tx, ty + 1))
+		if(ty + 1 <= level.getHeight() && level.getTile(tx, ty + 1).isCollider())
 		{
 			jump = 3;
 		}

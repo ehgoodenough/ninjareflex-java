@@ -5,28 +5,22 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class TiledLevel extends TiledMap
 {
-	boolean[][] colliders;
+	Tile[][] tiles;
 	
 	public TiledLevel(String path) throws SlickException
 	{
 		super(path);
 		
-		colliders = new boolean[getWidth()][getHeight()];
+		this.tiles = new Tile[this.getWidth()][this.getHeight()];
 		
-		for(int ty = 0; ty < getHeight(); ty++)
+		for(int ty = 0; ty < this.getHeight(); ty++)
 		{
-			for(int tx = 0; tx < getWidth(); tx++)
+			for(int tx = 0; tx < this.getWidth(); tx++)
 			{
 				int tid = getTileId(tx, ty, 0);
 				
-				if(getTileProperty(tid, "collider", "false").equals("false"))
-				{
-					colliders[tx][ty] = false;
-				}
-				else
-				{
-					colliders[tx][ty] = true;
-				}
+				boolean collider = this.getTileProperty(tid, "collider", "false").equals("true");
+				this.tiles[tx][ty] = new Tile(collider);
 			}
 		}
 	}
@@ -70,7 +64,7 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasNorthernMovement())
 		{
-			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
+			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
 			{
 				action.removeNorthernMovement();
 			}
@@ -78,7 +72,7 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasSouthernMovement())
 		{
-			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
+			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
 			{
 				action.removeSouthernMovement();
 			}
@@ -86,7 +80,7 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasWesternMovement())
 		{
-			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
+			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
 			{
 				action.removeWesternMovement();
 			}
@@ -94,20 +88,20 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasEasternMovement())
 		{
-			if(hasCollider(action.getNewTileX(), action.getNewTileY()))
+			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
 			{
 				action.removeEasternMovement();
 			}
 		}
 	}
 	
-	public boolean hasCollider(int tx, int ty)
+	public Tile getTile(int tx, int ty)
 	{
 		if(tx < 0 || tx >= getWidth() || ty < 0 || ty >= getHeight())
 		{
-			return false;
+			return null;
 		}
 		
-		return colliders[tx][ty];
+		return this.tiles[tx][ty];
 	}
 }
