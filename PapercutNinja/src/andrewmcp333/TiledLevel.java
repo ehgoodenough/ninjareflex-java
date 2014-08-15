@@ -17,7 +17,7 @@ public class TiledLevel extends TiledMap
 		{
 			for(int tx = 0; tx < this.getWidth(); tx++)
 			{
-				int tid = getTileId(tx, ty, 0);
+				int tid = this.getTileId(tx, ty, 0);
 				
 				boolean collider = this.getTileProperty(tid, "collider", "false").equals("true");
 				this.tiles[tx][ty] = new Tile(collider);
@@ -27,44 +27,67 @@ public class TiledLevel extends TiledMap
 	
 	public void render(Camera camera)
 	{
-		render(0 - camera.getOffset(), 0);
+		this.render(0 - camera.getOffset(), 0);
 	}
 	
 	public int getWidthInPixels()
 	{
-		return getWidth() * getTileWidth();
+		return this.getWidth() * this.getTileWidth();
 	}
 	
 	public int getHeightInPixels()
 	{
-		return getHeight() * getTileHeight();
+		return this.getHeight() * this.getTileHeight();
+	}
+	
+	public int getMinTileX()
+	{
+		return 0;
+	}
+	
+	public int getMaxTileX()
+	{
+		return this.getWidth();
+	}
+	
+	public int getMinTileY()
+	{
+		return 0;
+	}
+	
+	public int getMaxTileY()
+	{
+		return this.getHeight();
 	}
 	
 	public void collide(Action action)
 	{
-		if(action.getNewTileY() < 0)
+		if(action.getNewTileY() < this.getMinTileY())
 		{
 			action.removeNorthernMovement();
 		}
 		
-		if(action.getNewTileY() >= getHeight())
+		if(action.getNewTileY() >= this.getMaxTileY())
 		{
 			action.removeSouthernMovement();
 		}
 		
-		if(action.getNewTileX() >= getWidth())
+		if(action.getNewTileX() >= this.getMaxTileX())
 		{
 			action.removeEasternMovement();
 		}
 		
-		if(action.getNewTileX() < 0)
+		if(action.getNewTileX() < this.getMinTileX())
 		{
 			action.removeWesternMovement();
 		}
 		
 		if(action.hasNorthernMovement())
 		{
-			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
+			int ntx = action.getNewTileX();
+			int nty = action.getNewTileY();
+			
+			if(this.getTile(ntx, nty).isCollider())
 			{
 				action.removeNorthernMovement();
 			}
@@ -72,7 +95,10 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasSouthernMovement())
 		{
-			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
+			int ntx = action.getNewTileX();
+			int nty = action.getNewTileY();
+			
+			if(this.getTile(ntx, nty).isCollider())
 			{
 				action.removeSouthernMovement();
 			}
@@ -80,7 +106,10 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasWesternMovement())
 		{
-			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
+			int ntx = action.getNewTileX();
+			int nty = action.getNewTileY();
+			
+			if(this.getTile(ntx, nty).isCollider())
 			{
 				action.removeWesternMovement();
 			}
@@ -88,7 +117,10 @@ public class TiledLevel extends TiledMap
 		
 		if(action.hasEasternMovement())
 		{
-			if(this.getTile(action.getNewTileX(), action.getNewTileY()).isCollider())
+			int ntx = action.getNewTileX();
+			int nty = action.getNewTileY();
+			
+			if(this.getTile(ntx, nty).isCollider())
 			{
 				action.removeEasternMovement();
 			}
@@ -97,7 +129,8 @@ public class TiledLevel extends TiledMap
 	
 	public Tile getTile(int tx, int ty)
 	{
-		if(tx < 0 || tx >= getWidth() || ty < 0 || ty >= getHeight())
+		if(tx < 0 || tx >= this.getWidth()
+		|| ty < 0 || ty >= this.getHeight())
 		{
 			return null;
 		}
