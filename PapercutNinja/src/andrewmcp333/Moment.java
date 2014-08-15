@@ -19,14 +19,29 @@ public class Moment
 	public void update(int delta)
 	{
 		for(Action action : this.actions)
+		{
 			action.update(delta);
+		}
 	}
 	
-	public boolean isDone()
+	public boolean isFinished()
 	{
 		for(Action action : this.actions)
-			if(!action.isDone())
+		{
+			if(!action.isFinished())
+			{
 				return false;
+			}
+		}
+		
 		return true;
+	}
+	
+	public void finish()
+	{
+		for(Action action : this.actions)
+		{
+			action.finish();
+		}
 	}
 }

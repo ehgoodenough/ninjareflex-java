@@ -57,11 +57,10 @@ public class PapercutNinja extends BasicGame
 		{
 			moment.update(delta);
 			
-			if(moment.isDone())
+			if(moment.isFinished())
 			{
+				moment.finish();
 				moment = null;
-				
-				entities.papercut.collide(level);
 			}
 		}
 	}

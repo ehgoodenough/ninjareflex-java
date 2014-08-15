@@ -7,7 +7,6 @@ import org.newdawn.slick.SlickException;
 public class Ninja extends Entity
 {
 	public int jump = 3;
-	public boolean jumping = true;
 	
 	public Ninja(int x, int y) throws SlickException
 	{
@@ -46,6 +45,8 @@ public class Ninja extends Entity
 		
 		if(input.isKeyPressed(Input.KEY_S))
 		{
+			jump = 0;
+			
 			return new Action(this, Direction.SOUTH);
 		}
 		
@@ -94,14 +95,18 @@ public class Ninja extends Entity
 		return null;
 	}
 	
-	public void collide(TiledLevel level)
+	public void finish()
 	{
+		/*TiledLevel level;
+		
 		int tx = getTileX();
 		int ty = getTileY();
 		
 		if(ty + 1 <= level.getHeight() && level.getTile(tx, ty + 1).isCollider())
 		{
 			jump = 3;
-		}
+		}*/
+		
+		System.out.println("finished!");
 	}
 }

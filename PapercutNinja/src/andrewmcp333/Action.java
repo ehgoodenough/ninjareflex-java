@@ -4,9 +4,8 @@ public class Action
 {
 	private Entity entity;
 	private Direction direction;
-	private int tx = 0, ty = 0;
 	
-	private boolean done = false;
+	private int tx = 0, ty = 0;
 	
 	public Action(Entity entity, Direction direction)
 	{
@@ -171,11 +170,15 @@ public class Action
 	public void update(int delta)
 	{
 		this.entity.update(this, delta);
-		this.done = this.entity.isDone(this);
 	}
 	
-	public boolean isDone()
+	public boolean isFinished()
 	{
-		return this.done;
+		return this.entity.isFinished(this);
+	}
+	
+	public void finish()
+	{
+		this.entity.finish();
 	}
 }

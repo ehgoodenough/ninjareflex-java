@@ -57,10 +57,15 @@ public abstract class Entity
 		}
 	}
 	
-	public boolean isDone(Action action)
+	public boolean isFinished(Action action)
 	{
 		return this.x == action.getNewX()
 			&& this.y == action.getNewY();
+	}
+	
+	public void finish()
+	{
+		return;
 	}
 	
 	public void render(Camera camera)
