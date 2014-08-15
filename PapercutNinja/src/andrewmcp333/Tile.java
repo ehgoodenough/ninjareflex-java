@@ -11,6 +11,6 @@ public class Tile
 	
 	public boolean isCollider()
 	{
-		return collider;
+		return this.collider;
 	}
 }

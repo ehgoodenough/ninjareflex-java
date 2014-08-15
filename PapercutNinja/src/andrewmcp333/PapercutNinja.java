@@ -60,10 +60,9 @@ public class PapercutNinja extends BasicGame
 			if(moment.isDone())
 			{
 				moment = null;
+				
+				entities.papercut.collide(level);
 			}
-			
-			//entities.papercut.collide(level);
-			//System.out.println(entities.papercut.jump);
 		}
 	}
 	
