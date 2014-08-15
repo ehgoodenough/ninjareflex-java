@@ -50,7 +50,7 @@ public class PapercutNinja extends BasicGame
 				level.collide(papercut_action);
 				
 				moment.add(papercut_action);
-				moment.addAll(missile_actions);
+				moment.add(missile_actions);
 			}
 		}
 		else

@@ -9,60 +9,63 @@ public abstract class Entity
 	private Image image;
 	private float speed = 1f;
 	
-	public Entity(int x, int y, String image) throws SlickException
+	public Entity(int tx, int ty, String image) throws SlickException
 	{
-		this.x = x * 64;
-		this.y = y * 64;
-		
+		this.x = tx * 64;
+		this.y = ty * 64;
 		this.image = new Image(image);
 	}
 	
 	public float getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public float getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public int getTileX()
 	{
-		return (int)(x / 64);
+		return (int)(this.x / 64);
 	}
 	
 	public int getTileY()
 	{
-		return (int)(y / 64);
+		return (int)(this.y / 64);
 	}
 	
-	public boolean update(Action action, int delta)
+	public void update(Action action, int delta)
 	{
-		if(x < action.getNewX() - 0.25)
+		if(this.x < action.getNewX() - 0.25)
 		{
-			x += speed * delta;
+			this.x += this.speed * delta;
 		}
-		else if(x > action.getNewX() + 0.25)
+		else if(this.x > action.getNewX() + 0.25)
 		{
-			x -= speed * delta;
-		}
-		
-		if(y < action.getNewY() - 0.25)
-		{
-			y += speed * delta;
-		}
-		else if(y > action.getNewY() + 0.25)
-		{
-			y -= speed * delta;
+			this.x -= this.speed * delta;
 		}
 		
-		return x == action.getNewX() && y == action.getNewY();
+		if(this.y < action.getNewY() - 0.25)
+		{
+			this.y += this.speed * delta;
+		}
+		else if(this.y > action.getNewY() + 0.25)
+		{
+			this.y -= this.speed * delta;
+		}
+	}
+	
+	public boolean isDone(Action action)
+	{
+		return this.x == action.getNewX()
+			&& this.y == action.getNewY();
 	}
 	
 	public void render(Camera camera)
 	{
-		image.draw(x - camera.getOffset(), y);
+		image.draw(this.x - camera.getOffset(), this.y);
 	}
 	
 	public Action requestAction()

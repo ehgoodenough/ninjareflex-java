@@ -13,21 +13,21 @@ public class Camera
 		this.screen = screen;
 		this.focus = focus;
 		
-		minimumOffset = 0;
-		maximumOffset = level.getWidthInPixels() - screen.getWidth();
+		this.minimumOffset = 0;
+		this.maximumOffset = level.getWidthInPixels() - screen.getWidth();
 	}
 	
 	public int getOffset()
 	{
 		float offset = focus.getX() - screen.getHalfWidth();
 		
-		if(offset < minimumOffset)
+		if(offset < this.minimumOffset)
 		{
-			offset = minimumOffset;
+			offset = this.minimumOffset;
 		}
-		if(offset > maximumOffset)
+		if(offset > this.maximumOffset)
 		{
-			offset = maximumOffset;
+			offset = this.maximumOffset;
 		}
 		
 		return (int)offset;

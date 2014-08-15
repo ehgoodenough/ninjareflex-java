@@ -12,168 +12,170 @@ public class Action
 	{
 		this.entity = entity;
 		this.direction = direction;
+		
 		this.tx = entity.getTileX();
 		this.ty = entity.getTileY();
 	}
 	
 	public Direction getDirection()
 	{
-		return direction;
+		return this.direction;
 	}
 	
 	public boolean hasNorthernMovement()
 	{
-		return direction == Direction.NORTH || direction == Direction.NORTHEAST || direction == Direction.NORTHWEST;
+		return this.direction == Direction.NORTH || this.direction == Direction.NORTHEAST || this.direction == Direction.NORTHWEST;
 	}
 	
 	public boolean hasSouthernMovement()
 	{
-		return direction == Direction.SOUTH || direction == Direction.SOUTHEAST || direction == Direction.SOUTHWEST;
+		return this.direction == Direction.SOUTH || this.direction == Direction.SOUTHEAST || this.direction == Direction.SOUTHWEST;
 	}
 	
 	public boolean hasEasternMovement()
 	{
-		return direction == Direction.EAST || direction == Direction.NORTHEAST || direction == Direction.SOUTHEAST;
+		return this.direction == Direction.EAST || this.direction == Direction.NORTHEAST || this.direction == Direction.SOUTHEAST;
 	}
 	
 	public boolean hasWesternMovement()
 	{
-		return direction == Direction.WEST || direction == Direction.NORTHWEST || direction == Direction.SOUTHWEST;
+		return this.direction == Direction.WEST || this.direction == Direction.NORTHWEST || this.direction == Direction.SOUTHWEST;
 	}
 	
 	public void removeNorthernMovement()
 	{
-		if(direction == Direction.NORTH)
+		if(this.direction == Direction.NORTH)
 		{
-			direction = Direction.NONE;
+			this.direction = Direction.NONE;
 		}
-		else if(direction == Direction.NORTHEAST)
+		else if(this.direction == Direction.NORTHEAST)
 		{
-			direction = Direction.EAST;
+			this.direction = Direction.EAST;
 		}
-		else if(direction == Direction.NORTHWEST)
+		else if(this.direction == Direction.NORTHWEST)
 		{
-			direction = Direction.WEST;
+			this.direction = Direction.WEST;
 		}
 	}
 	
 	public void removeSouthernMovement()
 	{
-		if(direction == Direction.SOUTH)
+		if(this.direction == Direction.SOUTH)
 		{
-			direction = Direction.NONE;
+			this.direction = Direction.NONE;
 		}
-		else if(direction == Direction.SOUTHEAST)
+		else if(this.direction == Direction.SOUTHEAST)
 		{
-			direction = Direction.EAST;
+			this.direction = Direction.EAST;
 		}
-		else if(direction == Direction.SOUTHWEST)
+		else if(this.direction == Direction.SOUTHWEST)
 		{
-			direction = Direction.WEST;
+			this.direction = Direction.WEST;
 		}
 	}
 	
 	public void removeEasternMovement()
 	{
-		if(direction == Direction.EAST)
+		if(this.direction == Direction.EAST)
 		{
-			direction = Direction.NONE;
+			this.direction = Direction.NONE;
 		}
-		else if(direction == Direction.NORTHEAST)
+		else if(this.direction == Direction.NORTHEAST)
 		{
-			direction = Direction.NORTH;
+			this.direction = Direction.NORTH;
 		}
-		else if(direction == Direction.SOUTHEAST)
+		else if(this.direction == Direction.SOUTHEAST)
 		{
-			direction = Direction.SOUTH;
+			this.direction = Direction.SOUTH;
 		}
 	}
 	
 	public void removeWesternMovement()
 	{
-		if(direction == Direction.WEST)
+		if(this.direction == Direction.WEST)
 		{
-			direction = Direction.NONE;
+			this.direction = Direction.NONE;
 		}
-		else if(direction == Direction.NORTHWEST)
+		else if(this.direction == Direction.NORTHWEST)
 		{
-			direction = Direction.NORTH;
+			this.direction = Direction.NORTH;
 		}
-		else if(direction == Direction.SOUTHWEST)
+		else if(this.direction == Direction.SOUTHWEST)
 		{
-			direction = Direction.SOUTH;
+			this.direction = Direction.SOUTH;
 		}
 	}
 	
 	public int getTileX()
 	{
-		return tx;
+		return this.tx;
 	}
 	
 	public int getTileY()
 	{
-		return ty;
+		return this.ty;
 	}
 	
 	public int getX()
 	{
-		return getTileX() * 64;
+		return this.tx * 64;
 	}
 	
 	public int getY()
 	{
-		return getTileY() * 64;
+		return this.tx * 64;
 	}
 	
 	public int getNewTileX()
 	{
-		int tx = this.tx;
+		int ntx = this.tx;
 
-		if(hasEasternMovement())
+		if(this.hasEasternMovement())
 		{
-			tx += 1;
+			ntx += 1;
 		}
-		else if(hasWesternMovement())
+		else if(this.hasWesternMovement())
 		{
-			tx -= 1;
+			ntx -= 1;
 		}
 		
-		return tx;
+		return ntx;
 	}
 	
 	public int getNewTileY()
 	{
-		int ty = this.ty;
+		int nty = this.ty;
 
-		if(hasNorthernMovement())
+		if(this.hasNorthernMovement())
 		{
-			ty -= 1;
+			nty -= 1;
 		}
-		else if(hasSouthernMovement())
+		else if(this.hasSouthernMovement())
 		{
-			ty += 1;
+			nty += 1;
 		}
 		
-		return ty;
+		return nty;
 	}
 	
 	public int getNewX()
 	{
-		return getNewTileX() * 64;
+		return this.getNewTileX() * 64;
 	}
 	
 	public int getNewY()
 	{
-		return getNewTileY() * 64;
+		return this.getNewTileY() * 64;
 	}
 	
 	public void update(int delta)
 	{
-		done = entity.update(this, delta);
+		this.entity.update(this, delta);
+		this.done = this.entity.isDone(this);
 	}
 	
 	public boolean isDone()
 	{
-		return done;
+		return this.done;
 	}
 }
