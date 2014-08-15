@@ -14,19 +14,19 @@ public class Ninja extends Entity
 		super(x, y, "./res/ninja.png");
 	}
 	
-	public NinjaAction requestAction(Input input)
+	public Action requestAction(Input input)
 	{
 		if(input.isKeyPressed(Input.KEY_D))
 		{
 			if(jump == 0)
 			{
-				return new NinjaAction(this, Direction.SOUTHEAST);
+				return new Action(this, Direction.SOUTHEAST);
 			}
 			else
 			{
 				jump = 0;
 				
-				return new NinjaAction(this, Direction.EAST);
+				return new Action(this, Direction.EAST);
 			}
 		}
 		
@@ -34,19 +34,19 @@ public class Ninja extends Entity
 		{
 			if(jump == 0)
 			{
-				return new NinjaAction(this, Direction.SOUTHWEST);
+				return new Action(this, Direction.SOUTHWEST);
 			}
 			else
 			{
 				jump = 0;
 				
-				return new NinjaAction(this, Direction.WEST);
+				return new Action(this, Direction.WEST);
 			}
 		}
 		
 		if(input.isKeyPressed(Input.KEY_S))
 		{
-			return new NinjaAction(this, Direction.SOUTH);
+			return new Action(this, Direction.SOUTH);
 		}
 		
 		if(input.isKeyPressed(Input.KEY_W))
@@ -55,11 +55,11 @@ public class Ninja extends Entity
 			{
 				jump -= 1;
 				
-				return new NinjaAction(this, Direction.NORTH);
+				return new Action(this, Direction.NORTH);
 			}
 			else
 			{
-				return new NinjaAction(this, Direction.NONE);
+				return new Action(this, Direction.NONE);
 			}
 		}
 		
@@ -69,11 +69,11 @@ public class Ninja extends Entity
 			{
 				jump -= 1;
 				
-				return new NinjaAction(this, Direction.NORTHEAST);
+				return new Action(this, Direction.NORTHEAST);
 			}
 			else
 			{
-				return new NinjaAction(this, Direction.SOUTHEAST);
+				return new Action(this, Direction.SOUTHEAST);
 			}
 		}
 		
@@ -83,11 +83,11 @@ public class Ninja extends Entity
 			{
 				jump -= 1;
 				
-				return new NinjaAction(this, Direction.NORTHWEST);
+				return new Action(this, Direction.NORTHWEST);
 			}
 			else
 			{
-				return new NinjaAction(this, Direction.SOUTHWEST);
+				return new Action(this, Direction.SOUTHWEST);
 			}
 		}
 		
