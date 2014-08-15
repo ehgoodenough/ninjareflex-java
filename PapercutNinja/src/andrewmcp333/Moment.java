@@ -2,22 +2,11 @@ package andrewmcp333;
 
 import java.util.LinkedList;
 
-public class Moment
+public class Moment extends LinkedList<Action>
 {
-	private LinkedList<Action> actions = new LinkedList<Action>();
-
-	public void add(Action action)
-	{
-		actions.add(action);
-	}
-	public void add(LinkedList<Action> action)
-	{
-		actions.addAll(action);
-	}
-	
 	public boolean isDone()
 	{
-		for(Action action : actions)
+		for(Action action : this)
 			if(!action.isDone())
 				return false;
 		
@@ -26,7 +15,7 @@ public class Moment
 	
 	public void update(int delta)
 	{
-		for(Action action : actions)
+		for(Action action : this)
 			action.update(delta);
 	}
 }
