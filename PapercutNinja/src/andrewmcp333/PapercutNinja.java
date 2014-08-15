@@ -1,7 +1,5 @@
 package andrewmcp333;
 
-import java.util.LinkedList;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -12,11 +10,8 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class PapercutNinja extends BasicGame
 {
-	public Objedex entities;
-	public TiledLevel level;
 	public Screen screen;
 	public Camera camera;
-	
 	public Moment moment;
 	
 	public PapercutNinja()
@@ -26,14 +21,13 @@ public class PapercutNinja extends BasicGame
 	
 	public void init(GameContainer container) throws SlickException
 	{
-		entities = new Objedex();
-		entities.papercut = new Ninja(2, 2);
-		entities.missiles.add(new Missile(7, 3));
+		Objedex.papercut = new Ninja(2, 2);
+		Objedex.missiles.add(new Missile(7, 3));
 		
-		level = new TiledLevel("./res/level.tmx");
+		Objedex.level = new TiledLevel("./res/level.tmx");
 		
 		screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
-		camera = new Camera(screen, entities.papercut, level);
+		camera = new Camera(screen, Objedex.papercut, Objedex.level);
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException
@@ -42,15 +36,13 @@ public class PapercutNinja extends BasicGame
 		{
 			moment = new Moment();
 			
-			Action papercut_action = entities.papercut.requestAction(container.getInput());
-			LinkedList<Action> missile_actions = entities.missiles.requestActions();
+			Action action = Objedex.papercut.requestAction(container.getInput());
+			Objedex.level.collide(action);
 			
-			if(papercut_action != null)
+			if(action.getDirection() != Direction.NONE)
 			{
-				level.collide(papercut_action);
-				
-				moment.add(papercut_action);
-				moment.add(missile_actions);
+				moment.add(action);
+				moment.add(Objedex.missiles.requestActions());
 			}
 		}
 		else
@@ -67,9 +59,9 @@ public class PapercutNinja extends BasicGame
 	
 	public void render(GameContainer container, Graphics graphics) throws SlickException
 	{
-		level.render(camera);
-		entities.papercut.render(camera);
-		entities.missiles.render(camera);
+		Objedex.level.render(camera);
+		Objedex.papercut.render(camera);
+		Objedex.missiles.render(camera);
 	}
 	
 	public static void main(String[] args)

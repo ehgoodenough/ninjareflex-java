@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class Objedex
 {
-	public Ninja papercut;
-	public ObjedexEntry missiles = new ObjedexEntry();
+	public static Ninja papercut;
+	public static ObjedexEntry missiles = new ObjedexEntry();
+	public static TiledLevel level;
 }

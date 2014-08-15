@@ -7,6 +7,7 @@ public abstract class Entity
 {
 	public float x, y;
 	private Image image;
+	
 	private float speed = 1f;
 	
 	public Entity(int tx, int ty, String image) throws SlickException
@@ -57,6 +58,16 @@ public abstract class Entity
 		}
 	}
 	
+	public void render(Camera camera)
+	{
+		image.draw(this.x - camera.getOffset(), this.y);
+	}
+	
+	public Action requestAction()
+	{
+		return null;
+	}
+	
 	public boolean isFinished(Action action)
 	{
 		return this.x == action.getNewX()
@@ -66,15 +77,5 @@ public abstract class Entity
 	public void finish()
 	{
 		return;
-	}
-	
-	public void render(Camera camera)
-	{
-		image.draw(this.x - camera.getOffset(), this.y);
-	}
-	
-	public Action requestAction()
-	{
-		return null;
 	}
 }
